@@ -1,0 +1,10 @@
+look into the number guessing game
+suggestions:
+- most simple version of this game:
+  single word instead of whole phrase
+  eg if "word is cat" user guesses "cat"
+involves name == main
+- wait to put guess limitation
+- add list of guessed letters to a list
+  "if guessed_letter_array = current_guessed_letter:
+    print("error! already guessed!")
