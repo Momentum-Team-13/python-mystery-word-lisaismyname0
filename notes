@@ -8,3 +8,4 @@ involves name == main
 - add list of guessed letters to a list
   "if guessed_letter_array = current_guessed_letter:
     print("error! already guessed!")
+- add 8 turn limit
