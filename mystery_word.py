@@ -11,20 +11,18 @@ def start_game():
 
 
 def play_game():
-    list_word, display_word = start_game()
-    print(f"Your word is: {display_word}")
     already_guessed = []
-    current_guess = input("Guess a letter:")
-    if current_guess in list_word:
-        reveal_letters(current_guess, list_word, display_word)
-    elif current_guess in already_guessed:
-        print("No Double Guesses!")
-    else:
-        print("Nope! Keep Goin")
-        already_guessed.append(current_guess)
+    list_word, display_word = start_game()
+    print(f"Your word is {display_word}")
     while len(already_guessed) < 8 and "_" in display_word:
+        current_guess = input("Guess a letter:")
         print(f"You have {8 -len(already_guessed)} guesses remaining.")
-        play_game()
+        if current_guess in list_word:
+            reveal_letters(current_guess, list_word, display_word)
+        else:
+            print("Nope! Keep Goin")
+            already_guessed.append(current_guess)
+            print(already_guessed)
 
 
 def reveal_letters(current_guess, list_word, display_word):
@@ -35,13 +33,6 @@ def reveal_letters(current_guess, list_word, display_word):
             display_word[specific_index] = letter
             print(f"you correctly guessed letter: {letter}")
             print(f"Your word is: {display_word}")
-            play_game()
-    print(reveal_letters())
-
-
-"""def after_round_one(current_guess, list_word, display_word):
-    print(f"Here is your new display: {display_word}")
-    reveal_letters(current_guess, list_word, display_word)"""
 
 
 # add while loop to establish conditions of play_game() repeating (user runs out of guesses or user guesses word)
