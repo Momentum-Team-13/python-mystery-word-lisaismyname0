@@ -7,34 +7,41 @@ def start_game():
     underscore = "_"
     word_dash = []
     word_dash[:0] = underscore * word_length
-    print(f"Generated Word is: {underscore*word_length}")
     return list_word, word_dash
 
 
 def play_game():
     list_word, display_word = start_game()
+    print(f"Your word is: {display_word}")
     already_guessed = []
     current_guess = input("Guess a letter:")
     if current_guess in list_word:
         reveal_letters(current_guess, list_word, display_word)
-    else:
-        print("Nope! Keep Goin")
-
-    if current_guess in already_guessed:
+    elif current_guess in already_guessed:
         print("No Double Guesses!")
     else:
+        print("Nope! Keep Goin")
         already_guessed.append(current_guess)
-    print(already_guessed)
+    while len(already_guessed) < 8 and "_" in display_word:
+        print(f"You have {8 -len(already_guessed)} guesses remaining.")
+        play_game()
 
 
 def reveal_letters(current_guess, list_word, display_word):
     for letter in list_word:
         if current_guess == letter:
-            print(f"you correctly guessed letter: {letter}")
             specific_index = list_word.index(letter)
             print(specific_index)
             display_word[specific_index] = letter
-    print(f"this is {display_word}")
+            print(f"you correctly guessed letter: {letter}")
+            print(f"Your word is: {display_word}")
+            play_game()
+    print(reveal_letters())
+
+
+"""def after_round_one(current_guess, list_word, display_word):
+    print(f"Here is your new display: {display_word}")
+    reveal_letters(current_guess, list_word, display_word)"""
 
 
 # add while loop to establish conditions of play_game() repeating (user runs out of guesses or user guesses word)
