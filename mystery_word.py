@@ -1,40 +1,52 @@
+import random
+
+
+def pick_a_word(file):
+    word_bank = open(file, "r")
+    random_word = random.choice(word_bank.read().split())
+    word_bank.close()
+    return random_word
+
+
 def start_game():
-    with open("test-word.txt") as test_word:
-        generated_word = test_word.read()
-        list_word = []
-        list_word[:0] = generated_word
-    word_length = len(list_word)
-    underscore = "_"
+    generated_word = pick_a_word("words.txt")
+    print(generated_word)
+    list_word = []
     word_dash = []
-    word_dash[:0] = underscore * word_length
+    underscore = "_"
+    for letter in generated_word:
+        list_word.append(letter)
+        word_dash.append(underscore)
     return list_word, word_dash
 
 
 def play_game():
     already_guessed = []
     list_word, display_word = start_game()
-    print(f"Your word is {display_word}")
-    while len(already_guessed) < 8 and "_" in display_word:
-        current_guess = input("Guess a letter:")
+    while len(already_guessed) < 9 and "_" in display_word:
+        print(f"Your word is {display_word}")
+        current_guess = input("Guess a letter:").lower()
         print(f"You have {8 -len(already_guessed)} guesses remaining.")
         if current_guess in list_word:
             reveal_letters(current_guess, list_word, display_word)
+        elif current_guess in already_guessed:
+            print("You already guessed that letter!")
         else:
-            print("Nope! Keep Goin")
+            print("Nope! Keep guessin!")
             already_guessed.append(current_guess)
-            print(already_guessed)
+            print(f"Letters You've Guessed:{already_guessed}")
+    if len(already_guessed) == 9:
+        print("Sorry, you ran out of guesses :(")
+    elif "_" not in display_word:
+        print("You won Wheel of Fortune!")
 
 
 def reveal_letters(current_guess, list_word, display_word):
-    for letter in list_word:
-        if current_guess == letter:
-            specific_index = list_word.index(letter)
-            print(specific_index)
-            display_word[specific_index] = letter
-            print(f"you correctly guessed letter: {letter}")
-            print(f"Your word is: {display_word}")
+    for index, letter in enumerate(list_word):
+        if letter == current_guess:
+            display_word[index] = current_guess
+    print(f"you correctly guessed letter: {current_guess}")
 
 
-# add while loop to establish conditions of play_game() repeating (user runs out of guesses or user guesses word)
 if __name__ == "__main__":
     play_game()
