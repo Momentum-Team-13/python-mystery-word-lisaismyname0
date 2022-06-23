@@ -10,7 +10,6 @@ def pick_a_word(file):
 
 def start_game():
     generated_word = pick_a_word("words.txt")
-    # print(generated_word)
     list_word = []
     word_dash = []
     underscore = "_"
@@ -24,7 +23,7 @@ def play_game():
     already_guessed = []
     list_word, display_word = start_game()
     while len(already_guessed) < 9 and "_" in display_word:
-        print(f"Your word is {display_word}")
+        print("Your word is " + "".join(display_word))
         current_guess = input("Guess a letter:").lower()
         print(f"You have {8 -len(already_guessed)} guesses remaining.")
         if current_guess in list_word:
@@ -34,7 +33,7 @@ def play_game():
         else:
             print("Nope! Keep guessin!")
             already_guessed.append(current_guess)
-            print(f"Letters You've Guessed:{already_guessed}")
+            print("Letters You've Guessed: " + " ".join(already_guessed))
     if len(already_guessed) == 9:
         print("Sorry, you ran out of guesses :(")
         print("Your word was: " + "".join(list_word))
