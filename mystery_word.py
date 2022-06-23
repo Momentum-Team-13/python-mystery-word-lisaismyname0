@@ -10,7 +10,7 @@ def pick_a_word(file):
 
 def start_game():
     generated_word = pick_a_word("words.txt")
-    print(generated_word)
+    # print(generated_word)
     list_word = []
     word_dash = []
     underscore = "_"
@@ -37,6 +37,7 @@ def play_game():
             print(f"Letters You've Guessed:{already_guessed}")
     if len(already_guessed) == 9:
         print("Sorry, you ran out of guesses :(")
+        print("Your word was: " + "".join(list_word))
     elif "_" not in display_word:
         print("You won Wheel of Fortune!")
 
